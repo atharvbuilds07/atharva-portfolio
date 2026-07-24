@@ -1,1141 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atharva Barkale | B.Tech Computer Engineering Student & Aspiring Software Developer</title>
-<meta name="description" content="Portfolio of Atharva Barkale, a B.Tech Computer Engineering student with experience in software development, cloud computing, cyber security, AWS, data analytics, and database management.">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Atharva Barkale | B.Tech Computer Engineering Student & Aspiring Software Developer">
-<meta property="og:description" content="Portfolio of Atharva Barkale, a B.Tech Computer Engineering student with experience in software development, cloud computing, cyber security, AWS, data analytics, and database management.">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Atharva Barkale | B.Tech Computer Engineering Student & Aspiring Software Developer">
-<meta name="twitter:description" content="Portfolio of Atharva Barkale, a B.Tech Computer Engineering student with experience in software development, cloud computing, cyber security, AWS, data analytics, and database management.">
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atharv Amar Vadam — Software Developer</title>
+<meta name="description" content="Portfolio & resume of Atharv Amar Vadam, Computer Science Engineering student and aspiring software developer." />
 
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
-
 <!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
-
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <!-- Particles.js -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+<!-- Fonts: Space Grotesk (display), Outfit (body), JetBrains Mono (code/labels) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cyan: { glow: '#22d3ee' },
+          purple: { glow: '#a855f7' },
+          ink: '#080b13',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Outfit"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
 
 <style>
-  :root{
-    --bg-primary:#050816;
-    --bg-secondary:#0B1120;
-    --glass-card:rgba(255,255,255,0.05);
-    --glass-border:rgba(255,255,255,0.12);
-    --accent-cyan:#06B6D4;
-    --accent-purple:#8B5CF6;
-    --accent-blue:#3B82F6;
-    --text-primary:#FFFFFF;
-    --text-secondary:#94A3B8;
+  :root {
+    --cyan: #22d3ee;
+    --purple: #a855f7;
+    --magenta: #ec4899;
   }
 
-  *{ box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
 
-  html{ scroll-behavior:smooth; }
-
-  body{
-    background-color:var(--bg-primary);
-    color:var(--text-primary);
-    font-family:'Inter', sans-serif;
-    overflow-x:hidden;
+  body {
+    background-color: #080b13;
+    font-family: 'Outfit', sans-serif;
+    color: #e6e9f2;
+    overflow-x: hidden;
   }
 
-  h1,h2,h3,h4, .font-display{
-    font-family:'Space Grotesk', sans-serif;
+  /* Particles background layer */
+  #particles-js {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(ellipse at 20% 0%, rgba(168,85,247,0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(34,211,238,0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 100%, rgba(236,72,153,0.08) 0%, transparent 55%),
+                #080b13;
   }
 
-  .font-mono{
-    font-family:'JetBrains Mono', monospace;
+  main, header, footer { position: relative; z-index: 10; }
+
+  /* Glassmorphism card */
+  .glass {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Particles layer */
-  #particles-js{
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index:0;
-    pointer-events:none;
-    background:radial-gradient(ellipse at top, var(--bg-secondary) 0%, var(--bg-primary) 60%);
+  .glass-hover {
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: 0 20px 60px -15px rgba(34, 211, 238, 0.25), 0 0 0 1px rgba(168, 85, 247, 0.08) inset;
+    background: rgba(255, 255, 255, 0.055);
   }
 
-  #site-content{
-    position:relative;
-    z-index:10;
+  .text-gradient {
+    background: linear-gradient(100deg, var(--cyan) 0%, var(--purple) 55%, var(--magenta) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  /* Glass card */
-  .glass{
-    background:var(--glass-card);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+  .border-gradient {
+    border-image: linear-gradient(120deg, rgba(34,211,238,.6), rgba(168,85,247,.6)) 1;
   }
 
-  /* Gradient text */
-  .gradient-text{
-    background:linear-gradient(90deg,#06B6D4 0%, #3B82F6 50%, #8B5CF6 100%);
-    background-size:200% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:gradientShift 6s ease infinite;
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
   }
 
-  @keyframes gradientShift{
-    0%{ background-position:0% center; }
-    50%{ background-position:100% center; }
-    100%{ background-position:0% center; }
+  /* nav link underline */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: #fff; }
+
+  /* buttons */
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px -8px rgba(34, 211, 238, 0.45);
+  }
+  .btn-glow:active { transform: translateY(0px) scale(0.98); }
+
+  /* skill bar */
+  .skill-bar-fill {
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    transition: width 1.2s cubic-bezier(.2,.8,.2,1);
   }
 
-  /* Nav underline */
-  .nav-link{
-    position:relative;
-    color:var(--text-secondary);
-    transition:color .25s ease;
+  /* chip */
+  .chip {
+    transition: all 0.25s ease;
+    font-family: 'JetBrains Mono', monospace;
   }
-  .nav-link::after{
-    content:"";
-    position:absolute;
-    left:0; bottom:-4px;
-    width:0%; height:2px;
-    background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
-    transition:width .25s ease;
-  }
-  .nav-link:hover, .nav-link.active-link{
-    color:var(--text-primary);
-  }
-  .nav-link:hover::after, .nav-link.active-link::after{
-    width:100%;
+  .chip:hover {
+    border-color: rgba(34,211,238,0.5);
+    box-shadow: 0 0 20px -4px rgba(34,211,238,0.4);
+    transform: translateY(-2px);
   }
 
-  /* Buttons */
-  .btn-primary{
-    background:linear-gradient(90deg,var(--accent-cyan),var(--accent-blue));
-    color:#04101c;
-    font-weight:600;
-    transition:transform .25s ease, box-shadow .25s ease;
+  /* timeline dot pulse */
+  .pulse-dot {
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6);
+    animation: pulse 2.4s infinite;
   }
-  .btn-primary:hover{
-    transform:translateY(-2px) scale(1.02);
-    box-shadow:0 0 30px rgba(6,182,212,0.45);
-  }
-  .btn-secondary{
-    background:transparent;
-    border:1px solid var(--glass-border);
-    color:var(--text-primary);
-    transition:all .25s ease;
-  }
-  .btn-secondary:hover{
-    border-color:var(--accent-cyan);
-    box-shadow:0 0 20px rgba(6,182,212,0.25);
-    transform:translateY(-2px);
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(34, 211, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
   }
 
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-    outline:2px solid var(--accent-cyan);
-    outline-offset:3px;
-    border-radius:4px;
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #080b13; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(var(--cyan), var(--purple)); border-radius: 10px; }
+
+  /* focus visibility for accessibility */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  /* Status badge */
-  .status-badge{
-    display:inline-flex; align-items:center; gap:.5rem;
-    border:1px solid rgba(6,182,212,0.35);
-    background:rgba(6,182,212,0.08);
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .status-dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--accent-cyan);
-    box-shadow:0 0 8px var(--accent-cyan);
-    animation:pulseDot 2s ease-in-out infinite;
-  }
-  @keyframes pulseDot{
-    0%,100%{ opacity:1; } 50%{ opacity:.35; }
+  .fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Typing cursor */
-  .typing-cursor{
-    display:inline-block;
-    width:2px;
-    background:var(--accent-cyan);
-    margin-left:2px;
-    animation:blink 1s step-end infinite;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-
-  /* Floating profile card */
-  .floating-card{
-    animation:floatY 5s ease-in-out infinite;
-  }
-  @keyframes floatY{
-    0%,100%{ transform:translateY(0px); }
-    50%{ transform:translateY(-14px); }
-  }
-
-  /* Reveal animations */
-  .reveal{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity .7s ease, transform .7s ease;
-  }
-  .reveal.reveal-visible{
-    opacity:1;
-    transform:translateY(0);
-  }
-  .reveal-left{ transform:translateX(-32px); }
-  .reveal-left.reveal-visible{ transform:translateX(0); }
-  .reveal-right{ transform:translateX(32px); }
-  .reveal-right.reveal-visible{ transform:translateX(0); }
-
-  /* Skill bar */
-  .skill-bar-track{
-    background:rgba(255,255,255,0.08);
-    height:6px; border-radius:999px; overflow:hidden;
-  }
-  .skill-bar-fill{
-    height:100%; border-radius:999px;
-    width:0%;
-    background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));
-    transition:width 1.2s ease;
-  }
-
-  /* Timeline */
-  .timeline-line{
-    background:linear-gradient(180deg,var(--accent-cyan),var(--accent-purple));
-  }
-  .timeline-dot{
-    box-shadow:0 0 0 4px rgba(6,182,212,0.15), 0 0 14px rgba(6,182,212,0.6);
-  }
-
-  /* Card hover */
-  .hover-card{
-    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-  }
-  .hover-card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(6,182,212,0.4);
-    box-shadow:0 12px 40px rgba(6,182,212,0.12);
-  }
-
-  /* Chip */
-  .chip{
-    background:rgba(255,255,255,0.06);
-    border:1px solid var(--glass-border);
-    color:var(--text-secondary);
-    transition:all .2s ease;
-  }
-  .chip:hover{
-    color:var(--text-primary);
-    border-color:var(--accent-cyan);
-  }
-
-  /* Mobile menu */
-  #mobile-menu{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease;
-  }
-  #mobile-menu.open{
-    max-height:480px;
-  }
-
-  ::-webkit-scrollbar{ width:10px; }
-  ::-webkit-scrollbar-track{ background:var(--bg-primary); }
-  ::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,var(--accent-cyan),var(--accent-purple)); border-radius:10px; }
-
-  @media (prefers-reduced-motion: reduce){
-    *{
-      animation-duration:0.001ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:0.001ms !important;
-      scroll-behavior:auto !important;
-    }
-    .floating-card{ animation:none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
-<body class="antialiased">
+<body class="font-body antialiased">
 
-<!-- Particles background layer (fixed, behind content, non-interactive) -->
+<!-- Particles background -->
 <div id="particles-js" aria-hidden="true"></div>
 
-<div id="site-content">
-
-  <!-- ===================== NAVIGATION ===================== -->
-  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-    <nav class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between" aria-label="Primary navigation">
-      <a href="#home" class="font-display text-lg font-semibold tracking-wide">
-        Atharva <span class="gradient-text">Barkale</span>
+<!-- ============ NAV ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <nav class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div id="navInner" class="mt-4 flex items-center justify-between glass rounded-2xl px-5 py-3 transition-all duration-500">
+      <a href="#home" class="font-display font-semibold text-lg tracking-tight text-white">
+        Atharv Vadam<span class="text-gradient"></span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <li><a href="#home" class="nav-link" data-nav>Home</a></li>
-        <li><a href="#about" class="nav-link" data-nav>About</a></li>
-        <li><a href="#experience" class="nav-link" data-nav>Experience</a></li>
-        <li><a href="#skills" class="nav-link" data-nav>Skills</a></li>
-        <li><a href="#education" class="nav-link" data-nav>Education</a></li>
-        <li><a href="#projects" class="nav-link" data-nav>Projects</a></li>
-        <li><a href="#contact" class="nav-link" data-nav>Contact</a></li>
-      </ul>
+      <div class="hidden md:flex items-center gap-8 text-sm text-slate-300 eyebrow">
+        <a href="#about" class="nav-link hover:text-white transition-colors">ABOUT</a>
+        <a href="#experience" class="nav-link hover:text-white transition-colors">EXPERIENCE</a>
+        <a href="#education" class="nav-link hover:text-white transition-colors">EDUCATION</a>
+        <a href="#projects" class="nav-link hover:text-white transition-colors">PROJECTS</a>
+        <a href="#skills" class="nav-link hover:text-white transition-colors">SKILLS</a>
+        <a href="#contact" class="nav-link hover:text-white transition-colors">CONTACT</a>
+      </div>
 
-      <a href="#contact" class="hidden md:inline-flex btn-primary text-sm px-5 py-2.5 rounded-full">
-        Let's Connect
+      <a href="#contact" class="hidden md:inline-flex btn-glow items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400/90 to-purple-500/90 text-ink font-semibold text-sm px-5 py-2">
+        <i data-lucide="send" class="w-4 h-4"></i> Let's Talk
       </a>
 
-      <button id="menu-toggle" class="md:hidden text-white" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-        <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
-        <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+      <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-white p-2">
+        <i data-lucide="menu" class="w-6 h-6"></i>
       </button>
-    </nav>
-
-    <div id="mobile-menu" class="md:hidden glass mx-4 rounded-2xl">
-      <ul class="flex flex-col gap-1 p-4 text-sm font-medium">
-        <li><a href="#home" class="block py-2 nav-link" data-nav data-mobile>Home</a></li>
-        <li><a href="#about" class="block py-2 nav-link" data-nav data-mobile>About</a></li>
-        <li><a href="#experience" class="block py-2 nav-link" data-nav data-mobile>Experience</a></li>
-        <li><a href="#skills" class="block py-2 nav-link" data-nav data-mobile>Skills</a></li>
-        <li><a href="#education" class="block py-2 nav-link" data-nav data-mobile>Education</a></li>
-        <li><a href="#projects" class="block py-2 nav-link" data-nav data-mobile>Projects</a></li>
-        <li><a href="#contact" class="block py-2 nav-link" data-nav data-mobile>Contact</a></li>
-        <li class="pt-2">
-          <a href="#contact" class="btn-primary block text-center text-sm px-5 py-2.5 rounded-full" data-mobile>Let's Connect</a>
-        </li>
-      </ul>
     </div>
-  </header>
 
-  <!-- ===================== HERO ===================== -->
-  <section id="home" class="relative min-h-screen flex items-center px-5 sm:px-8 pt-32 pb-20">
-    <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden mt-2 glass rounded-2xl px-5 py-4 flex flex-col gap-4 text-sm text-slate-200 eyebrow">
+      <a href="#about" class="mobile-link py-1">ABOUT</a>
+      <a href="#experience" class="mobile-link py-1">EXPERIENCE</a>
+      <a href="#education" class="mobile-link py-1">EDUCATION</a>
+      <a href="#projects" class="mobile-link py-1">PROJECTS</a>
+      <a href="#skills" class="mobile-link py-1">SKILLS</a>
+      <a href="#contact" class="mobile-link py-1">CONTACT</a>
+    </div>
+  </nav>
+</header>
 
-      <!-- Left -->
-      <div class="reveal reveal-left">
-        <span class="status-badge text-xs sm:text-sm px-4 py-2 rounded-full mb-6">
-          <span class="status-dot" aria-hidden="true"></span>
-          Open to Software Development Opportunities
-        </span>
+<main>
 
-        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-4">
-          <span class="gradient-text">ATHARVA</span><br>
-          <span class="gradient-text">BARKALE</span>
+  <!-- ============ HERO ============ -->
+  <section id="home" class="min-h-screen flex items-center px-5 sm:px-8 pt-32 pb-20">
+    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-5 gap-10 items-center">
+
+      <div class="md:col-span-3 fade-up">
+        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-6 eyebrow text-xs text-cyan-300">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 pulse-dot"></span>
+          AVAILABLE FOR OPPORTUNITIES
+        </div>
+
+        <p class="eyebrow text-sm text-purple-300 mb-3">$ whoami</p>
+
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-700 leading-[1.08] text-white mb-5">
+          Atharv Amar<br class="hidden sm:block" /> <span class="text-gradient">Vadam</span>
         </h1>
 
-        <p class="font-mono text-base sm:text-lg text-[--accent-cyan] mb-6 h-7" aria-live="polite">
-          <span id="typing-text"></span><span class="typing-cursor" aria-hidden="true">&nbsp;</span>
+        <p class="font-mono text-cyan-300/90 text-sm sm:text-base mb-6">
+          Computer Science Engineering Student <span class="text-slate-500">//</span> Aspiring Software Developer
         </p>
 
-        <p class="text-[color:var(--text-secondary)] text-base sm:text-lg leading-relaxed max-w-xl mb-8">
-          B.Tech Computer Engineering student with a strong interest in software development and a solid foundation in Full-Stack Development, Data Analytics, Object-Oriented Programming, and Database Management. Completed internships in Cloud Computing and Cyber Security, gaining practical experience with AWS, Kali Linux, network security, and cloud technologies. Passionate about developing practical software solutions, solving problems, and continuously learning emerging technologies.
+        <p class="text-slate-300 leading-relaxed max-w-xl mb-8">
+          Motivated B.Tech Computer Science Engineering student with a strong foundation in
+          Frontend Development, Object-Oriented Programming, and Database Management.
+          Completed internships in Cloud Computing and Cyber Security with hands-on
+          experience in AWS and Kali Linux. Skilled in web development, CRUD operations,
+          and problem-solving — eager to contribute as a Software Developer while
+          continuously learning emerging technologies.
         </p>
 
-        <div class="flex flex-wrap gap-4">
-          <a href="#projects" class="btn-primary px-6 py-3 rounded-full text-sm">View My Work</a>
-          <a href="Atharva_Barkale_Resume.pdf" download class="btn-secondary px-6 py-3 rounded-full text-sm flex items-center gap-2">
-            <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+        <div class="flex flex-wrap items-center gap-4 mb-8">
+          <a href="#projects" class="btn-glow inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-ink font-semibold px-6 py-3 text-sm">
+            <i data-lucide="folder-code" class="w-4 h-4"></i> View Projects
           </a>
-          <a href="#contact" class="btn-secondary px-6 py-3 rounded-full text-sm">Get In Touch</a>
+          <a href="#contact" class="btn-glow inline-flex items-center gap-2 rounded-full glass text-white font-semibold px-6 py-3 text-sm">
+            <i data-lucide="mail" class="w-4 h-4"></i> Contact Me
+          </a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/workwithatharva07" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="glass-hover glass w-11 h-11 rounded-xl flex items-center justify-center text-slate-200 hover:text-cyan-300">
+            <i data-lucide="github" class="w-5 h-5"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/atharvvadam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="glass-hover glass w-11 h-11 rounded-xl flex items-center justify-center text-slate-200 hover:text-cyan-300">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          </a>
+          <a href="mailto:atharvvadam2126@gmail.com" aria-label="Send email" class="glass-hover glass w-11 h-11 rounded-xl flex items-center justify-center text-slate-200 hover:text-cyan-300">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </a>
+          <a href="tel:+918767372126" aria-label="Call phone number" class="glass-hover glass w-11 h-11 rounded-xl flex items-center justify-center text-slate-200 hover:text-cyan-300">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+          </a>
         </div>
       </div>
 
-      <!-- Right -->
-      <div class="reveal reveal-right flex flex-col items-center">
-        <div class="floating-card glass rounded-3xl p-8 w-full max-w-sm text-center">
-          <div class="w-32 h-32 mx-auto rounded-full glass flex items-center justify-center mb-6 border-2" style="border-color:var(--accent-cyan);">
-            <i data-lucide="user" class="w-14 h-14" style="color:var(--accent-cyan);"></i>
-          </div>
-          <h2 class="font-display text-xl font-semibold mb-1">Atharva Barkale</h2>
-          <p class="text-sm text-[color:var(--text-secondary)] mb-1">B.Tech Computer Engineering Student</p>
-          <p class="text-sm text-[color:var(--text-secondary)] mb-6">Aspiring Software Developer</p>
+      <div class="md:col-span-2 fade-up" style="transition-delay:120ms">
+       <!-- Profile Image Container -->
+<div class="relative overflow-hidden rounded-2xl aspect-square">
+  
+  <!-- Your Profile Photo -->
+  <img 
+    src="atharv-profile.jpeg" 
+    alt="Atharv Amar Vadam"
+    class="w-full h-full object-cover"
+  />
 
-          <div class="flex justify-center gap-4">
-            <a href="https://www.linkedin.com/in/atharva-barkale" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="chip w-11 h-11 rounded-full flex items-center justify-center">
-              <i data-lucide="linkedin" class="w-5 h-5"></i>
-            </a>
-            <a href="mailto:barkaleatharva4@gmail.com" aria-label="Send email" class="chip w-11 h-11 rounded-full flex items-center justify-center">
-              <i data-lucide="mail" class="w-5 h-5"></i>
-            </a>
-            <a href="tel:+919529517990" aria-label="Call phone number" class="chip w-11 h-11 rounded-full flex items-center justify-center">
-              <i data-lucide="phone" class="w-5 h-5"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-[#080b13]/80 via-transparent to-transparent"></div>
 
-    </div>
-  </section>
+  <!-- Bottom Information -->
+  <div class="absolute bottom-0 left-0 right-0 p-5">
+    <p class="eyebrow text-xs text-cyan-300 mb-1">
+      SOFTWARE DEVELOPER | UI/UX
+    </p>
 
-  <!-- ===================== ABOUT ===================== -->
-  <section id="about" class="relative py-28 px-5 sm:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="reveal mb-14">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">About</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Who I Am</h2>
-      </div>
+    <h3 class="font-display text-xl font-semibold text-white">
+      Atharv Amar Vadam
+    </h3>
 
-      <div class="grid lg:grid-cols-5 gap-10">
-        <div class="lg:col-span-2 reveal reveal-left glass rounded-2xl p-8">
-          <h3 class="font-display text-xl font-semibold mb-4">Career Objective</h3>
-          <p class="text-[color:var(--text-secondary)] leading-relaxed">
-            I'm a B.Tech Computer Engineering student aiming to build a career in software development. I enjoy turning problems into practical, working software, and I'm continuously expanding my skills across full-stack development, cloud platforms, and cyber security.
-          </p>
-        </div>
+    <p class="text-sm text-slate-300 mt-1">
+      Computer Science Engineering Student
+    </p>
+  </div>
 
-        <div class="lg:col-span-3 reveal">
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="code-2" class="w-6 h-6 mb-3" style="color:var(--accent-cyan);"></i>
-              <h4 class="font-semibold mb-1">Software Development</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Building practical, working applications end to end.</p>
-            </div>
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="layers" class="w-6 h-6 mb-3" style="color:var(--accent-blue);"></i>
-              <h4 class="font-semibold mb-1">Full-Stack Development</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Comfortable across front-end interfaces and back-end logic.</p>
-            </div>
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="bar-chart-3" class="w-6 h-6 mb-3" style="color:var(--accent-purple);"></i>
-              <h4 class="font-semibold mb-1">Data Analytics</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Working knowledge of turning data into insight with Power BI.</p>
-            </div>
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="cloud" class="w-6 h-6 mb-3" style="color:var(--accent-cyan);"></i>
-              <h4 class="font-semibold mb-1">Cloud Computing</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Hands-on experience with AWS services through internship work.</p>
-            </div>
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="shield-check" class="w-6 h-6 mb-3" style="color:var(--accent-blue);"></i>
-              <h4 class="font-semibold mb-1">Cyber Security</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Practical exposure to Kali Linux and network security fundamentals.</p>
-            </div>
-            <div class="glass hover-card rounded-2xl p-6">
-              <i data-lucide="database" class="w-6 h-6 mb-3" style="color:var(--accent-purple);"></i>
-              <h4 class="font-semibold mb-1">Database Management</h4>
-              <p class="text-sm text-[color:var(--text-secondary)]">Solid foundation in MySQL and JDBC connectivity.</p>
-            </div>
-          </div>
-        </div>
+</div>
+
+<!-- Status -->
+<div class="flex items-center justify-center gap-2 mt-5">
+  <span class="w-2 h-2 rounded-full bg-green-400 pulse-dot"></span>
+  <span class="text-sm text-slate-300">
+    Open to Opportunities
+  </span>
+</div>
+</div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== EXPERIENCE ===================== -->
-  <section id="experience" class="relative py-28 px-5 sm:px-8">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal mb-16">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">Experience</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Internship Experience</h2>
-      </div>
-
-      <div class="relative pl-10 sm:pl-14">
-        <div class="timeline-line absolute left-3 sm:left-5 top-0 bottom-0 w-[3px] rounded-full" aria-hidden="true"></div>
-
-        <div class="relative mb-14 reveal">
-          <span class="timeline-dot absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 rounded-full" style="background:var(--accent-cyan);" aria-hidden="true"></span>
-          <div class="glass hover-card rounded-2xl p-7">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 class="font-display text-lg font-semibold">Cyber Security & Ethical Hacking Intern</h3>
-              <span class="font-mono text-xs px-3 py-1 rounded-full chip">Jun 2024 – May 2025</span>
-            </div>
-            <p class="text-sm mb-4" style="color:var(--accent-cyan);">BITS Techno, Kolhapur</p>
-            <p class="text-[color:var(--text-secondary)] text-sm leading-relaxed mb-4">
-              Successfully completed industrial training in Cyber Security and Ethical Hacking. Gained practical exposure to Kali Linux and Network Security. Acquired experience in cloud platforms, network security, risk assessment, and implementing cybersecurity best practices.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="chip text-xs px-3 py-1 rounded-full">Kali Linux</span>
-              <span class="chip text-xs px-3 py-1 rounded-full">Network Security</span>
-              <span class="chip text-xs px-3 py-1 rounded-full">Cyber Security</span>
-              <span class="chip text-xs px-3 py-1 rounded-full">Ethical Hacking</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative reveal">
-          <span class="timeline-dot absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 rounded-full" style="background:var(--accent-purple);" aria-hidden="true"></span>
-          <div class="glass hover-card rounded-2xl p-7">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 class="font-display text-lg font-semibold">Cloud Computing Intern</h3>
-              <span class="font-mono text-xs px-3 py-1 rounded-full chip">May 2025 – Jul 2025</span>
-            </div>
-            <p class="text-sm mb-4" style="color:var(--accent-purple);">Acmegrade, Bengaluru</p>
-            <p class="text-[color:var(--text-secondary)] text-sm leading-relaxed mb-4">
-              Successfully completed a Cloud Computing internship with practical exposure to AWS services and cloud technologies.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="chip text-xs px-3 py-1 rounded-full">AWS Cloud</span>
-              <span class="chip text-xs px-3 py-1 rounded-full">AWS Lex</span>
-              <span class="chip text-xs px-3 py-1 rounded-full">Cloud Computing</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SKILLS ===================== -->
-  <section id="skills" class="relative py-28 px-5 sm:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="reveal mb-16">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">Skills</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Technical Skills</h2>
-      </div>
-
-      <div id="skills-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="terminal" class="w-5 h-5" style="color:var(--accent-cyan);"></i>
-            <h3 class="font-display font-semibold">Programming Languages</h3>
-          </div>
-          <div class="space-y-4">
-            <div class="skill-item" data-level="80"><div class="flex justify-between text-xs mb-1"><span>Java</span><span class="text-[color:var(--text-secondary)]">Hands-on Experience</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="80"><div class="flex justify-between text-xs mb-1"><span>Python</span><span class="text-[color:var(--text-secondary)]">Hands-on Experience</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="70"><div class="flex justify-between text-xs mb-1"><span>JavaScript</span><span class="text-[color:var(--text-secondary)]">Working Knowledge</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="60"><div class="flex justify-between text-xs mb-1"><span>C++</span><span class="text-[color:var(--text-secondary)]">Working Knowledge</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="60"><div class="flex justify-between text-xs mb-1"><span>C</span><span class="text-[color:var(--text-secondary)]">Working Knowledge</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="layout" class="w-5 h-5" style="color:var(--accent-blue);"></i>
-            <h3 class="font-display font-semibold">Frontend Development</h3>
-          </div>
-          <div class="space-y-4">
-            <div class="skill-item" data-level="75"><div class="flex justify-between text-xs mb-1"><span>HTML</span><span class="text-[color:var(--text-secondary)]">Hands-on Experience</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="70"><div class="flex justify-between text-xs mb-1"><span>CSS</span><span class="text-[color:var(--text-secondary)]">Working Knowledge</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="database" class="w-5 h-5" style="color:var(--accent-purple);"></i>
-            <h3 class="font-display font-semibold">Database & Connectivity</h3>
-          </div>
-          <div class="space-y-4">
-            <div class="skill-item" data-level="75"><div class="flex justify-between text-xs mb-1"><span>MySQL</span><span class="text-[color:var(--text-secondary)]">Hands-on Experience</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-            <div class="skill-item" data-level="65"><div class="flex justify-between text-xs mb-1"><span>JDBC</span><span class="text-[color:var(--text-secondary)]">Working Knowledge</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="brain-circuit" class="w-5 h-5" style="color:var(--accent-cyan);"></i>
-            <h3 class="font-display font-semibold">Core Concepts</h3>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Object-Oriented Programming</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Full-Stack Development</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Database Management</span>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="shield" class="w-5 h-5" style="color:var(--accent-blue);"></i>
-            <h3 class="font-display font-semibold">Cloud & Cyber Security</h3>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1.5 rounded-full">AWS Cloud</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">AWS Lex</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Kali Linux</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Network Security</span>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="pie-chart" class="w-5 h-5" style="color:var(--accent-purple);"></i>
-            <h3 class="font-display font-semibold">Data Analytics</h3>
-          </div>
-          <div class="flex flex-wrap gap-2 mb-2">
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Power BI</span>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal sm:col-span-2 lg:col-span-1">
-          <div class="flex items-center gap-3 mb-5">
-            <i data-lucide="wrench" class="w-5 h-5" style="color:var(--accent-cyan);"></i>
-            <h3 class="font-display font-semibold">Development Tools</h3>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1.5 rounded-full">VS Code</span>
-            <span class="chip text-xs px-3 py-1.5 rounded-full">Eclipse</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== EDUCATION ===================== -->
-  <section id="education" class="relative py-28 px-5 sm:px-8">
-    <div class="max-w-5xl mx-auto">
-      <div class="reveal mb-16">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">Education</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Academic Background</h2>
-      </div>
-
-      <div class="relative pl-10 sm:pl-14">
-        <div class="timeline-line absolute left-3 sm:left-5 top-0 bottom-0 w-[3px] rounded-full" aria-hidden="true"></div>
-
-        <!--
-          NOTE FOR DEPLOYMENT: The duration listed on the source resume for the
-          Diploma in Computer Engineering is "Aug 2022 – Jul 2026", which is unusually
-          long for a standard diploma program. This date range has been kept exactly
-          as provided and has NOT been altered. Please verify this date range with
-          the candidate before deploying this site publicly.
-        -->
-        <div class="relative mb-14 reveal">
-          <span class="timeline-dot absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 rounded-full" style="background:var(--accent-cyan);" aria-hidden="true"></span>
-          <div class="glass hover-card rounded-2xl p-7">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 class="font-display text-lg font-semibold">Diploma in Computer Engineering</h3>
-              <span class="font-mono text-xs px-3 py-1 rounded-full chip">Aug 2022 – Jul 2026 *</span>
-            </div>
-            <p class="text-sm mb-3" style="color:var(--accent-cyan);">Dr. D. Y. Patil Polytechnic, Kolhapur</p>
-            <p class="text-[color:var(--text-secondary)] text-sm">Grade: <span class="text-white font-semibold">78.44%</span></p>
-            <p class="text-[10px] text-[color:var(--text-secondary)] mt-3">* Date range as provided on source resume — recommended to verify before publishing.</p>
-          </div>
-        </div>
-
-        <div class="relative reveal">
-          <span class="timeline-dot absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 rounded-full" style="background:var(--accent-purple);" aria-hidden="true"></span>
-          <div class="glass hover-card rounded-2xl p-7">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 class="font-display text-lg font-semibold">Secondary School (SSC – Class X)</h3>
-              <span class="font-mono text-xs px-3 py-1 rounded-full chip">Jun 2021 – May 2022</span>
-            </div>
-            <p class="text-sm mb-3" style="color:var(--accent-purple);">Murgud Vidyalay, Murgud</p>
-            <p class="text-[color:var(--text-secondary)] text-sm">Grade: <span class="text-white font-semibold">83.20%</span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick stats -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-16 reveal">
-        <div class="glass rounded-2xl p-6 text-center">
-          <p class="font-display text-3xl sm:text-4xl font-bold gradient-text" data-counter data-suffix="+" data-target="2">0</p>
-          <p class="text-xs text-[color:var(--text-secondary)] mt-2">Internships</p>
-        </div>
-        <div class="glass rounded-2xl p-6 text-center">
-          <p class="font-display text-3xl sm:text-4xl font-bold gradient-text" data-counter data-target="3">0</p>
-          <p class="text-xs text-[color:var(--text-secondary)] mt-2">Academic Projects</p>
-        </div>
-        <div class="glass rounded-2xl p-6 text-center">
-          <p class="font-display text-3xl sm:text-4xl font-bold gradient-text" data-counter data-suffix="%" data-decimal="2" data-target="78.44">0</p>
-          <p class="text-xs text-[color:var(--text-secondary)] mt-2">Diploma Grade</p>
-        </div>
-        <div class="glass rounded-2xl p-6 text-center">
-          <p class="font-display text-3xl sm:text-4xl font-bold gradient-text" data-counter data-suffix="%" data-decimal="2" data-target="83.20">0</p>
-          <p class="text-xs text-[color:var(--text-secondary)] mt-2">SSC Grade</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PROJECTS ===================== -->
-  <section id="projects" class="relative py-28 px-5 sm:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="reveal mb-16">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">Projects</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold">Academic Projects</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="glass hover-card rounded-2xl p-7 reveal flex flex-col">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(6,182,212,0.12);">
-            <i data-lucide="utensils" class="w-6 h-6" style="color:var(--accent-cyan);"></i>
-          </div>
-          <h3 class="font-display text-lg font-semibold mb-2">Smart Hotel Ordering System</h3>
-          <p class="text-sm text-[color:var(--text-secondary)] leading-relaxed mb-5 flex-1">
-            A digital hotel ordering system that enables customers to browse the menu, place orders, and make payments through a QR code or tablet interface.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1 rounded-full">HTML</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">CSS</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">JavaScript</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">PHP</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">MySQL</span>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal flex flex-col">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(59,130,246,0.12);">
-            <i data-lucide="bot" class="w-6 h-6" style="color:var(--accent-blue);"></i>
-          </div>
-          <h3 class="font-display text-lg font-semibold mb-2">Food Ordering Chatbot</h3>
-          <p class="text-sm text-[color:var(--text-secondary)] leading-relaxed mb-5 flex-1">
-            An AI-powered chatbot built using AWS Lex to assist customers in selecting and ordering food.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1 rounded-full">AWS Lex</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">AWS Cloud</span>
-          </div>
-        </div>
-
-        <div class="glass hover-card rounded-2xl p-7 reveal flex flex-col">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,92,246,0.12);">
-            <i data-lucide="clipboard-check" class="w-6 h-6" style="color:var(--accent-purple);"></i>
-          </div>
-          <h3 class="font-display text-lg font-semibold mb-2">College Attendance System</h3>
-          <p class="text-sm text-[color:var(--text-secondary)] leading-relaxed mb-5 flex-1">
-            A full-stack attendance management system for recording, updating, and monitoring student attendance.
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip text-xs px-3 py-1 rounded-full">Java</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">JDBC</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">MySQL</span>
-            <span class="chip text-xs px-3 py-1 rounded-full">HTML</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== CONTACT ===================== -->
-  <section id="contact" class="relative py-28 px-5 sm:px-8">
+  <!-- ============ ABOUT / SUMMARY ============ -->
+  <section id="about" class="px-5 sm:px-8 py-20">
     <div class="max-w-6xl mx-auto">
-      <div class="reveal mb-16 text-center">
-        <p class="font-mono text-sm text-[color:var(--accent-cyan)] mb-2">Contact</p>
-        <h2 class="font-display text-3xl sm:text-4xl font-bold mb-3">Let's Connect</h2>
-        <p class="text-[color:var(--text-secondary)] max-w-xl mx-auto">Have an opportunity, project, or idea? I'd love to hear from you.</p>
+      <div class="fade-up mb-12">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ cat about.md</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white">About Me</h2>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-10">
-
-        <!-- Contact cards -->
-        <div class="grid sm:grid-cols-2 gap-5 reveal reveal-left content-start">
-          <a href="mailto:barkaleatharva4@gmail.com" class="glass hover-card rounded-2xl p-6 flex flex-col gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(6,182,212,0.12);">
-              <i data-lucide="mail" class="w-5 h-5" style="color:var(--accent-cyan);"></i>
-            </div>
-            <div>
-              <p class="text-xs text-[color:var(--text-secondary)] mb-1">Email</p>
-              <p class="text-sm font-medium break-words">barkaleatharva4@gmail.com</p>
-            </div>
-          </a>
-
-          <a href="tel:+919529517990" class="glass hover-card rounded-2xl p-6 flex flex-col gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(59,130,246,0.12);">
-              <i data-lucide="phone" class="w-5 h-5" style="color:var(--accent-blue);"></i>
-            </div>
-            <div>
-              <p class="text-xs text-[color:var(--text-secondary)] mb-1">Phone</p>
-              <p class="text-sm font-medium">+91 9529517990</p>
-            </div>
-          </a>
-
-          <div class="glass hover-card rounded-2xl p-6 flex flex-col gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(139,92,246,0.12);">
-              <i data-lucide="map-pin" class="w-5 h-5" style="color:var(--accent-purple);"></i>
-            </div>
-            <div>
-              <p class="text-xs text-[color:var(--text-secondary)] mb-1">Location</p>
-              <p class="text-sm font-medium">Kolhapur, Maharashtra, India</p>
-            </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="fade-up glass glass-hover rounded-2xl p-6">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-cyan-400/5 flex items-center justify-center mb-4 text-cyan-300">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
           </div>
-
-          <a href="https://www.linkedin.com/in/atharva-barkale" target="_blank" rel="noopener noreferrer" class="glass hover-card rounded-2xl p-6 flex flex-col gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(6,182,212,0.12);">
-              <i data-lucide="linkedin" class="w-5 h-5" style="color:var(--accent-cyan);"></i>
-            </div>
-            <div>
-              <p class="text-xs text-[color:var(--text-secondary)] mb-1">LinkedIn</p>
-              <p class="text-sm font-medium">/in/atharva-barkale</p>
-            </div>
-          </a>
+          <h3 class="font-display font-600 text-white mb-2">Frontend Development</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Building clean, responsive interfaces with HTML, CSS, JavaScript & Bootstrap.</p>
         </div>
 
-        <!-- Contact form -->
-        <div class="glass rounded-2xl p-7 reveal reveal-right">
-          <form id="contact-form" novalidate>
-            <div class="mb-5">
-              <label for="cf-name" class="block text-xs text-[color:var(--text-secondary)] mb-2">Name</label>
-              <input type="text" id="cf-name" name="name" required
-                class="w-full bg-transparent border rounded-xl px-4 py-3 text-sm text-white placeholder-[color:var(--text-secondary)]"
-                style="border-color:var(--glass-border);" placeholder="Your full name">
-              <p class="text-xs mt-1 hidden text-red-400" data-error-for="cf-name">Please enter your name.</p>
-            </div>
-
-            <div class="mb-5">
-              <label for="cf-email" class="block text-xs text-[color:var(--text-secondary)] mb-2">Email</label>
-              <input type="email" id="cf-email" name="email" required
-                class="w-full bg-transparent border rounded-xl px-4 py-3 text-sm text-white placeholder-[color:var(--text-secondary)]"
-                style="border-color:var(--glass-border);" placeholder="you@example.com">
-              <p class="text-xs mt-1 hidden text-red-400" data-error-for="cf-email">Please enter a valid email address.</p>
-            </div>
-
-            <div class="mb-5">
-              <label for="cf-message" class="block text-xs text-[color:var(--text-secondary)] mb-2">Message</label>
-              <textarea id="cf-message" name="message" rows="4" required
-                class="w-full bg-transparent border rounded-xl px-4 py-3 text-sm text-white placeholder-[color:var(--text-secondary)] resize-none"
-                style="border-color:var(--glass-border);" placeholder="Tell me about the opportunity or idea..."></textarea>
-              <p class="text-xs mt-1 hidden text-red-400" data-error-for="cf-message">Please enter a message.</p>
-            </div>
-
-            <button type="submit" class="btn-primary w-full py-3 rounded-xl text-sm">Send Message</button>
-
-            <p id="form-success" class="hidden text-xs mt-4 text-center leading-relaxed" style="color:var(--accent-cyan);">
-              Thanks for reaching out! This form isn't connected to an email service yet, so please email
-              <a href="mailto:barkaleatharva4@gmail.com" class="underline">barkaleatharva4@gmail.com</a> directly for now.
-            </p>
-          </form>
+        <div class="fade-up glass glass-hover rounded-2xl p-6" style="transition-delay:100ms">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center mb-4 text-purple-300">
+            <i data-lucide="cloud" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-display font-600 text-white mb-2">Cloud & Security</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Hands-on internship experience with AWS Cloud, AWS Lex, Kali Linux, and network security.</p>
         </div>
 
+        <div class="fade-up glass glass-hover rounded-2xl p-6" style="transition-delay:200ms">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-fuchsia-400/20 to-fuchsia-400/5 flex items-center justify-center mb-4 text-fuchsia-300">
+            <i data-lucide="database" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-display font-600 text-white mb-2">Database Management</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">Designing schemas and performing CRUD operations with MySQL for full-stack projects.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="relative border-t px-5 sm:px-8 py-12" style="border-color:var(--glass-border);">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="text-center md:text-left">
-        <p class="font-display font-semibold">Atharva Barkale</p>
-        <p class="text-xs text-[color:var(--text-secondary)] mt-1">B.Tech Computer Engineering Student | Aspiring Software Developer</p>
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="px-5 sm:px-8 py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up mb-12">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ ls internships/</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white">Internship Experience</h2>
       </div>
 
-      <div class="flex items-center gap-4">
-        <a href="https://www.linkedin.com/in/atharva-barkale" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="chip w-10 h-10 rounded-full flex items-center justify-center">
-          <i data-lucide="linkedin" class="w-4 h-4"></i>
-        </a>
-        <a href="mailto:barkaleatharva4@gmail.com" aria-label="Email" class="chip w-10 h-10 rounded-full flex items-center justify-center">
-          <i data-lucide="mail" class="w-4 h-4"></i>
-        </a>
-        <a href="tel:+919529517990" aria-label="Phone" class="chip w-10 h-10 rounded-full flex items-center justify-center">
-          <i data-lucide="phone" class="w-4 h-4"></i>
-        </a>
-      </div>
+      <div class="relative pl-8 sm:pl-10">
+        <!-- vertical line -->
+        <div class="absolute left-[7px] sm:left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-cyan-400/60 via-purple-500/50 to-transparent"></div>
 
-      <button id="back-to-top" aria-label="Back to top" class="chip w-10 h-10 rounded-full flex items-center justify-center">
-        <i data-lucide="arrow-up" class="w-4 h-4"></i>
-      </button>
+        <div class="relative mb-10 fade-up">
+          <span class="absolute -left-8 sm:-left-10 top-1.5 w-4 h-4 rounded-full bg-cyan-400 pulse-dot"></span>
+          <div class="glass glass-hover rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h3 class="font-display font-600 text-lg text-white">Cyber Security & Ethical Hacking Intern</h3>
+              <span class="eyebrow text-xs text-cyan-300 bg-cyan-400/10 border border-cyan-400/25 rounded-full px-3 py-1">01 JUN 2024 – 31 MAY 2025</span>
+            </div>
+            <p class="text-sm text-purple-300 mb-3">BITS Techno, Kolhapur</p>
+            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+              Successfully completed industrial training in Cyber Security and Ethical Hacking
+              using Kali Linux and Network Security.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">Kali Linux</span>
+              <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">Network Security</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative fade-up" style="transition-delay:100ms">
+          <span class="absolute -left-8 sm:-left-10 top-1.5 w-4 h-4 rounded-full bg-purple-400 pulse-dot"></span>
+          <div class="glass glass-hover rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h3 class="font-display font-600 text-lg text-white">Cloud Computing Intern</h3>
+              <span class="eyebrow text-xs text-purple-300 bg-purple-400/10 border border-purple-400/25 rounded-full px-3 py-1">13 MAY 2025 – 13 JUL 2025</span>
+            </div>
+            <p class="text-sm text-purple-300 mb-3">Acmegrade, Bengaluru</p>
+            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+              Successfully completed a Cloud Computing internship with practical exposure to
+              AWS services (like AWS Lex) and cloud technologies.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip text-xs text-purple-200 border border-purple-400/30 rounded-full px-3 py-1">AWS Lex</span>
+              <span class="chip text-xs text-purple-200 border border-purple-400/30 rounded-full px-3 py-1">AWS Cloud</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <p class="text-center text-xs text-[color:var(--text-secondary)] mt-10">© 2026 Atharva Barkale. All rights reserved.</p>
-  </footer>
+  <!-- ============ EDUCATION ============ -->
+  <section id="education" class="px-5 sm:px-8 py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up mb-12">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ cat education.log</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white">Education</h2>
+      </div>
 
-</div><!-- /site-content -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7">
+          <div class="flex items-start justify-between gap-3 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-cyan-400/5 flex items-center justify-center text-cyan-300 shrink-0">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <span class="eyebrow text-xs text-slate-400">2022 – 2025</span>
+          </div>
+          <h3 class="font-display font-600 text-lg text-white mb-1">Diploma in Computer Engineering</h3>
+          <p class="text-sm text-slate-400 mb-4">Dr. D. Y. Patil Polytechnic, Kasba Bawada, Kolhapur</p>
+          <div>
+            <div class="flex justify-between text-xs text-slate-400 mb-1.5">
+              <span>Grade</span><span class="text-cyan-300 font-mono">82.24%</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+              <div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="82.24"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7" style="transition-delay:100ms">
+          <div class="flex items-start justify-between gap-3 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center text-purple-300 shrink-0">
+              <i data-lucide="school" class="w-5 h-5"></i>
+            </div>
+            <span class="eyebrow text-xs text-slate-400">2021 – 2022</span>
+          </div>
+          <h3 class="font-display font-600 text-lg text-white mb-1">Secondary School (CBSE – Class X)</h3>
+          <p class="text-sm text-slate-400 mb-4">Sanjeevan Public School, Panhala, Kolhapur, Maharashtra</p>
+          <div>
+            <div class="flex justify-between text-xs text-slate-400 mb-1.5">
+              <span>Grade</span><span class="text-purple-300 font-mono">76.33%</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+              <div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="76.33"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="px-5 sm:px-8 py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up mb-12">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ ls projects/</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white">Academic Projects</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7 flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-400/10 flex items-center justify-center mb-5 text-cyan-300">
+            <i data-lucide="utensils" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-600 text-xl text-white mb-2">Smart Hotel Ordering System</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-5 flex-1">
+            Developed a digital hotel ordering system that enables customers to browse the
+            menu, place orders, and make payments through a QR code or tablet interface.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">HTML</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">CSS</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">JavaScript</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">PHP</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1">MySQL</span>
+          </div>
+        </div>
+
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7 flex flex-col" style="transition-delay:100ms">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400/20 to-fuchsia-400/10 flex items-center justify-center mb-5 text-purple-300">
+            <i data-lucide="bot" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-600 text-xl text-white mb-2">Car Order Chatbot</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-5 flex-1">
+            Developed an AI-powered chatbot using AWS Lex to assist customers in selecting
+            and ordering vehicles.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip text-xs text-purple-200 border border-purple-400/30 rounded-full px-3 py-1">AWS Lex</span>
+            <span class="chip text-xs text-purple-200 border border-purple-400/30 rounded-full px-3 py-1">AWS Cloud</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="px-5 sm:px-8 py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up mb-12">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ cat skills.yaml</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white">Technical Skills</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6 mb-10">
+        <!-- Programming languages with bars -->
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7">
+          <h3 class="font-display font-600 text-white mb-5 flex items-center gap-2">
+            <i data-lucide="terminal" class="w-5 h-5 text-cyan-300"></i> Programming Languages
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>C / C++ (OOPS)</span><span class="font-mono text-cyan-300">85%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="85"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>Java</span><span class="font-mono text-cyan-300">75%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="75"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>Python</span><span class="font-mono text-cyan-300">75%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="75"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>JavaScript</span><span class="font-mono text-cyan-300">80%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="80"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frontend & DB with bars -->
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7" style="transition-delay:100ms">
+          <h3 class="font-display font-600 text-white mb-5 flex items-center gap-2">
+            <i data-lucide="layout-template" class="w-5 h-5 text-purple-300"></i> Frontend & Databases
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>HTML / CSS</span><span class="font-mono text-purple-300">90%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="90"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>Bootstrap / Responsive Design</span><span class="font-mono text-purple-300">82%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="82"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>MySQL / CRUD Operations</span><span class="font-mono text-purple-300">80%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-300 mb-1.5"><span>Networking</span><span class="font-mono text-purple-300">70%</span></div>
+              <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:0%" data-fill="70"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chips: core concepts & cloud/tools -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7">
+          <h3 class="font-display font-600 text-white mb-4 flex items-center gap-2">
+            <i data-lucide="brain-circuit" class="w-5 h-5 text-fuchsia-300"></i> Core Concepts
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip text-xs text-fuchsia-200 border border-fuchsia-400/30 rounded-full px-3 py-1.5">OOPS</span>
+            <span class="chip text-xs text-fuchsia-200 border border-fuchsia-400/30 rounded-full px-3 py-1.5">Network Security</span>
+            <span class="chip text-xs text-fuchsia-200 border border-fuchsia-400/30 rounded-full px-3 py-1.5">Networking</span>
+            <span class="chip text-xs text-fuchsia-200 border border-fuchsia-400/30 rounded-full px-3 py-1.5">Operating Systems</span>
+          </div>
+        </div>
+
+        <div class="fade-up glass glass-hover rounded-2xl p-6 sm:p-7" style="transition-delay:100ms">
+          <h3 class="font-display font-600 text-white mb-4 flex items-center gap-2">
+            <i data-lucide="cloud-cog" class="w-5 h-5 text-cyan-300"></i> Cloud & Tools
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1.5">AWS Cloud</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1.5">AWS Lex</span>
+            <span class="chip text-xs text-cyan-200 border border-cyan-400/30 rounded-full px-3 py-1.5">Kali Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="px-5 sm:px-8 py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up mb-12 text-center">
+        <p class="eyebrow text-sm text-purple-300 mb-2">$ ./connect --with atharv</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-700 text-white mb-3">Let's Build Something Together</h2>
+        <p class="text-slate-400 max-w-xl mx-auto">Open to Software Developer roles and collaborative projects. Reach out through any of the channels below.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <a href="mailto:atharvvadam2126@gmail.com" class="fade-up glass glass-hover rounded-2xl p-6 text-center group">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-cyan-400/20 to-cyan-400/5 flex items-center justify-center mb-4 text-cyan-300 group-hover:scale-110 transition-transform">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </div>
+          <p class="text-xs text-slate-400 mb-1 eyebrow">EMAIL</p>
+          <p class="text-sm text-white break-words">atharvvadam2126@gmail.com</p>
+        </a>
+
+        <a href="tel:+918767372126" class="fade-up glass glass-hover rounded-2xl p-6 text-center group" style="transition-delay:80ms">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center mb-4 text-purple-300 group-hover:scale-110 transition-transform">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+          </div>
+          <p class="text-xs text-slate-400 mb-1 eyebrow">PHONE</p>
+          <p class="text-sm text-white">+91 8767372126</p>
+        </a>
+
+        <a href="https://www.linkedin.com/in/atharvvadam" target="_blank" rel="noopener noreferrer" class="fade-up glass glass-hover rounded-2xl p-6 text-center group" style="transition-delay:160ms">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-fuchsia-400/20 to-fuchsia-400/5 flex items-center justify-center mb-4 text-fuchsia-300 group-hover:scale-110 transition-transform">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          </div>
+          <p class="text-xs text-slate-400 mb-1 eyebrow">LINKEDIN</p>
+          <p class="text-sm text-white">/in/atharvvadam</p>
+        </a>
+
+        <a href="https://github.com/workwithatharva07" target="_blank" rel="noopener noreferrer" class="fade-up glass glass-hover rounded-2xl p-6 text-center group" style="transition-delay:240ms">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-400/10 flex items-center justify-center mb-4 text-cyan-300 group-hover:scale-110 transition-transform">
+            <i data-lucide="github" class="w-5 h-5"></i>
+          </div>
+          <p class="text-xs text-slate-400 mb-1 eyebrow">GITHUB</p>
+          <p class="text-sm text-white">@workwithatharva07</p>
+        </a>
+      </div>
+
+      <div class="fade-up mt-8 glass rounded-2xl p-5 flex items-center justify-center gap-2 text-sm text-slate-300">
+        <i data-lucide="map-pin" class="w-4 h-4 text-cyan-300"></i>
+        Kolhapur, Maharashtra, India, 416205
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="px-5 sm:px-8 py-8 border-t border-white/5">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 eyebrow">
+    <p>&copy; <span id="year"></span> Atharv Amar Vadam. All rights reserved.</p>
+    <p class="flex items-center gap-1.5">Built with <i data-lucide="heart" class="w-3.5 h-3.5 text-fuchsia-400"></i> and lots of coffee.</p>
+  </div>
+</footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+  // Init Lucide icons
+  lucide.createIcons();
 
-  /* ---------- Lucide icons ---------- */
-  if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+    menuBtn.innerHTML = isHidden
+      ? '<i data-lucide="x" class="w-6 h-6"></i>'
+      : '<i data-lucide="menu" class="w-6 h-6"></i>';
     lucide.createIcons();
-  }
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+      lucide.createIcons();
+    });
+  });
 
-  /* ---------- Particles.js ---------- */
-  function initParticles() {
-    if (typeof particlesJS === 'undefined') return;
+  // Sticky nav shrink on scroll
+  const navInner = document.getElementById('navInner');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      navInner.classList.add('py-2');
+      navInner.classList.remove('py-3');
+    } else {
+      navInner.classList.remove('py-2');
+      navInner.classList.add('py-3');
+    }
+  });
+
+  // Scroll-spy active nav link
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => spyObserver.observe(s));
+
+  // Fade-up on scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => revealObserver.observe(el));
+
+  // Animate skill / grade bars when visible
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const fill = bar.getAttribute('data-fill');
+        bar.style.width = fill + '%';
+        barObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.skill-bar-fill').forEach(el => barObserver.observe(el));
+
+  // Particles.js configuration
+  if (window.particlesJS) {
     particlesJS('particles-js', {
       particles: {
-        number: { value: 55, density: { enable: true, value_area: 900 } },
-        color: { value: ['#06B6D4', '#3B82F6', '#8B5CF6'] },
+        number: { value: 70, density: { enable: true, value_area: 900 } },
+        color: { value: ['#22d3ee', '#a855f7', '#ec4899'] },
         shape: { type: 'circle' },
-        opacity: { value: 0.35, random: true },
-        size: { value: 2.5, random: true },
-        line_linked: { enable: true, distance: 140, color: '#3B82F6', opacity: 0.15, width: 1 },
-        move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out' }
+        opacity: { value: 0.45, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.1, sync: false } },
+        size: { value: 2.6, random: true },
+        line_linked: {
+          enable: true,
+          distance: 140,
+          color: '#38bdf8',
+          opacity: 0.18,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.1,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
       },
       interactivity: {
-        detect_on: 'canvas',
+        detect_on: 'window',
         events: {
           onhover: { enable: true, mode: 'grab' },
-          onclick: { enable: false },
+          onclick: { enable: true, mode: 'push' },
           resize: true
         },
-        modes: { grab: { distance: 140, line_linked: { opacity: 0.3 } } }
+        modes: {
+          grab: { distance: 150, line_linked: { opacity: 0.4 } },
+          push: { particles_nb: 3 }
+        }
       },
       retina_detect: true
     });
   }
-  // particles.js is loaded with defer; give it a tick in case DOMContentLoaded fires first
-  if (typeof particlesJS === 'undefined') {
-    window.addEventListener('load', initParticles);
-  } else {
-    initParticles();
-  }
-
-  /* Ensure the particles canvas never intercepts pointer events */
-  var particlesContainer = document.getElementById('particles-js');
-  if (particlesContainer) {
-    particlesContainer.style.pointerEvents = 'none';
-  }
-
-  /* ---------- Sticky nav background on scroll ---------- */
-  var navbar = document.getElementById('navbar');
-  function updateNavbarBg() {
-    if (!navbar) return;
-    if (window.scrollY > 40) {
-      navbar.classList.add('glass');
-    } else {
-      navbar.classList.remove('glass');
-    }
-  }
-  updateNavbarBg();
-  window.addEventListener('scroll', updateNavbarBg, { passive: true });
-
-  /* ---------- Mobile menu ---------- */
-  var menuToggle = document.getElementById('menu-toggle');
-  var mobileMenu = document.getElementById('mobile-menu');
-  var iconOpen = document.getElementById('menu-icon-open');
-  var iconClose = document.getElementById('menu-icon-close');
-
-  function closeMobileMenu() {
-    if (!mobileMenu || !menuToggle) return;
-    mobileMenu.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    if (iconOpen) iconOpen.classList.remove('hidden');
-    if (iconClose) iconClose.classList.add('hidden');
-  }
-
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', function () {
-      var isOpen = mobileMenu.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-      if (iconOpen) iconOpen.classList.toggle('hidden', isOpen);
-      if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
-    });
-
-    document.querySelectorAll('#mobile-menu [data-mobile]').forEach(function (el) {
-      el.addEventListener('click', closeMobileMenu);
-    });
-  }
-
-  /* ---------- Smooth scroll for nav links ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      var targetId = link.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      var targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        var offset = 80;
-        var top = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-    });
-  });
-
-  /* ---------- Scroll spy ---------- */
-  var sections = Array.prototype.slice.call(document.querySelectorAll('main, section[id]'))
-    .concat(Array.prototype.slice.call(document.querySelectorAll('section[id]')));
-  var sectionEls = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
-  var navLinks = document.querySelectorAll('[data-nav]');
-
-  function updateActiveLink() {
-    var scrollPos = window.scrollY + 120;
-    var currentId = null;
-    sectionEls.forEach(function (sec) {
-      if (sec.offsetTop <= scrollPos) {
-        currentId = sec.getAttribute('id');
-      }
-    });
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute('href');
-      if (href === '#' + currentId) {
-        link.classList.add('active-link');
-      } else {
-        link.classList.remove('active-link');
-      }
-    });
-  }
-  updateActiveLink();
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-
-  /* ---------- Typing animation ---------- */
-  var typingEl = document.getElementById('typing-text');
-  var typingPhrases = [
-    'B.Tech Computer Engineering Student',
-    'Aspiring Software Developer',
-    'Full-Stack Development Enthusiast',
-    'Cloud Computing Enthusiast',
-    'Cyber Security Learner',
-    'Data Analytics Enthusiast'
-  ];
-  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (typingEl) {
-    if (prefersReducedMotion) {
-      typingEl.textContent = typingPhrases[0];
-    } else {
-      (function typeLoop() {
-        var phraseIndex = 0;
-        var charIndex = 0;
-        var deleting = false;
-
-        function tick() {
-          var current = typingPhrases[phraseIndex];
-          if (!deleting) {
-            charIndex++;
-            typingEl.textContent = current.slice(0, charIndex);
-            if (charIndex === current.length) {
-              deleting = true;
-              setTimeout(tick, 1400);
-              return;
-            }
-          } else {
-            charIndex--;
-            typingEl.textContent = current.slice(0, charIndex);
-            if (charIndex === 0) {
-              deleting = false;
-              phraseIndex = (phraseIndex + 1) % typingPhrases.length;
-            }
-          }
-          setTimeout(tick, deleting ? 35 : 65);
-        }
-        tick();
-      })();
-    }
-  }
-
-  /* ---------- Reveal on scroll (IntersectionObserver) ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    var revealObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function (el) { revealObserver.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('reveal-visible'); });
-  }
-
-  /* ---------- Skill bar fill animation ---------- */
-  var skillItems = document.querySelectorAll('.skill-item');
-  if ('IntersectionObserver' in window && skillItems.length) {
-    var skillObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var level = entry.target.getAttribute('data-level') || '0';
-          var fill = entry.target.querySelector('.skill-bar-fill');
-          if (fill) fill.style.width = level + '%';
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    skillItems.forEach(function (el) { skillObserver.observe(el); });
-  } else {
-    skillItems.forEach(function (el) {
-      var level = el.getAttribute('data-level') || '0';
-      var fill = el.querySelector('.skill-bar-fill');
-      if (fill) fill.style.width = level + '%';
-    });
-  }
-
-  /* ---------- Counter animation ---------- */
-  var counters = document.querySelectorAll('[data-counter]');
-  function animateCounter(el) {
-    var target = parseFloat(el.getAttribute('data-target') || '0');
-    var decimals = parseInt(el.getAttribute('data-decimal') || '0', 10);
-    var suffix = el.getAttribute('data-suffix') || '';
-    var duration = 1400;
-    var startTime = null;
-
-    function step(timestamp) {
-      if (startTime === null) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-      var value = target * progress;
-      el.textContent = value.toFixed(decimals) + suffix;
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        el.textContent = target.toFixed(decimals) + suffix;
-      }
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  if ('IntersectionObserver' in window && counters.length) {
-    var counterObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function (el) { counterObserver.observe(el); });
-  } else {
-    counters.forEach(function (el) {
-      var target = parseFloat(el.getAttribute('data-target') || '0');
-      var decimals = parseInt(el.getAttribute('data-decimal') || '0', 10);
-      var suffix = el.getAttribute('data-suffix') || '';
-      el.textContent = target.toFixed(decimals) + suffix;
-    });
-  }
-
-  /* ---------- Contact form validation (frontend only, no backend) ---------- */
-  var contactForm = document.getElementById('contact-form');
-  var formSuccess = document.getElementById('form-success');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var nameInput = document.getElementById('cf-name');
-      var emailInput = document.getElementById('cf-email');
-      var messageInput = document.getElementById('cf-message');
-
-      var isValid = true;
-
-      function toggleError(input, condition) {
-        if (!input) return;
-        var errorEl = contactForm.querySelector('[data-error-for="' + input.id + '"]');
-        if (condition) {
-          if (errorEl) errorEl.classList.remove('hidden');
-          input.style.borderColor = '#f87171';
-          isValid = false;
-        } else {
-          if (errorEl) errorEl.classList.add('hidden');
-          input.style.borderColor = 'var(--glass-border)';
-        }
-      }
-
-      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      toggleError(nameInput, !nameInput || nameInput.value.trim().length === 0);
-      toggleError(emailInput, !emailInput || !emailPattern.test(emailInput.value.trim()));
-      toggleError(messageInput, !messageInput || messageInput.value.trim().length === 0);
-
-      if (isValid) {
-        if (formSuccess) formSuccess.classList.remove('hidden');
-        contactForm.reset();
-      } else {
-        if (formSuccess) formSuccess.classList.add('hidden');
-      }
-    });
-  }
-
-  /* ---------- Back to top ---------- */
-  var backToTop = document.getElementById('back-to-top');
-  if (backToTop) {
-    backToTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-});
 </script>
 
 </body>
