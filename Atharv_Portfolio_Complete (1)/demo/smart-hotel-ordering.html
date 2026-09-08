@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Hotel Ordering System — Live Demo</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { cyan: { glow: '#22d3ee' }, purple: { glow: '#a855f7' }, ink: '#080b13' },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Outfit"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  :root { --cyan: #22d3ee; --purple: #a855f7; --magenta: #ec4899; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #080b13;
+    font-family: 'Outfit', sans-serif;
+    color: #e6e9f2;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(168,85,247,0.14) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 10%, rgba(34,211,238,0.12) 0%, transparent 45%);
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+  .glass {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-hover { transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s ease, box-shadow .3s ease; }
+  .glass-hover:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34,211,238,.35);
+    box-shadow: 0 16px 40px -12px rgba(34,211,238,.25);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, var(--cyan) 0%, var(--purple) 55%, var(--magenta) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .btn-glow { box-shadow: 0 8px 24px -8px rgba(34,211,238,.5); transition: transform .25s ease, box-shadow .25s ease; }
+  .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(34,211,238,.65); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(34,211,238,.3); border-radius: 8px; }
+  .cart-drawer { transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+  .cart-drawer.closed { transform: translateX(100%); }
+  .qty-btn { transition: background .2s ease, transform .15s ease; }
+  .qty-btn:active { transform: scale(.9); }
+  .toast { animation: toastIn .35s ease forwards; }
+  @keyframes toastIn { from { opacity:0; transform: translateY(10px) scale(.95); } to { opacity:1; transform: translateY(0) scale(1); } }
+  .check-pop { animation: checkPop .5s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes checkPop { 0% { transform: scale(0); opacity:0; } 60% { transform: scale(1.15); opacity:1; } 100% { transform: scale(1); } }
+</style>
+</head>
+<body class="pb-24">
+
+<!-- Header -->
+<header class="sticky top-0 z-30 px-4 sm:px-6 py-3 glass border-b border-white/5">
+  <div class="max-w-5xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-ink">
+        <i data-lucide="utensils" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <p class="font-display font-700 text-sm sm:text-base text-white leading-tight">The Grand Table</p>
+        <p class="eyebrow text-[10px] text-slate-400">Table 07 · QR Ordering Demo</p>
+      </div>
+    </div>
+    <button id="cartToggle" class="relative glass glass-hover rounded-full px-4 py-2 flex items-center gap-2 text-sm">
+      <i data-lucide="shopping-cart" class="w-4 h-4 text-cyan-300"></i>
+      <span class="hidden sm:inline">Cart</span>
+      <span id="cartCount" class="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-400 to-purple-500 text-ink text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- Banner -->
+<div class="px-4 sm:px-6 pt-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="eyebrow text-xs text-purple-300 mb-1">$ live-preview / smart-hotel-ordering-system</p>
+    <h1 class="font-display text-2xl sm:text-3xl font-700 text-white mb-1">Welcome — scan, browse, order</h1>
+    <p class="text-sm text-slate-400 max-w-xl">This is a fully working front-end simulation of the ordering flow from Atharv's Diploma project: browse the menu, add items to your cart, and place a mock order — no real payment is processed.</p>
+  </div>
+</div>
+
+<!-- Category tabs -->
+<div class="px-4 sm:px-6 mt-6">
+  <div class="max-w-5xl mx-auto flex gap-2 overflow-x-auto pb-1" id="categoryTabs"></div>
+</div>
+
+<!-- Menu grid -->
+<main class="px-4 sm:px-6 mt-4">
+  <div class="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="menuGrid"></div>
+</main>
+
+<!-- Cart Drawer -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+<aside id="cartDrawer" class="cart-drawer closed fixed top-0 right-0 h-full w-full sm:w-96 z-50 glass border-l border-white/10 flex flex-col">
+  <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+    <h2 class="font-display font-600 text-lg text-white">Your Order</h2>
+    <button id="closeCart" class="text-slate-400 hover:text-white p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+  </div>
+
+  <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4 space-y-3"></div>
+
+  <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center text-center px-6 text-slate-500">
+    <i data-lucide="shopping-bag" class="w-10 h-10 mb-3 opacity-40"></i>
+    <p class="text-sm">Your cart is empty.<br/>Add something delicious!</p>
+  </div>
+
+  <div class="px-5 py-4 border-t border-white/10">
+    <div class="flex items-center justify-between text-sm text-slate-400 mb-1">
+      <span>Subtotal</span><span id="subtotal">₹0</span>
+    </div>
+    <div class="flex items-center justify-between text-sm text-slate-400 mb-3">
+      <span>Taxes (5%)</span><span id="taxes">₹0</span>
+    </div>
+    <div class="flex items-center justify-between font-display font-600 text-white text-lg mb-4">
+      <span>Total</span><span id="total">₹0</span>
+    </div>
+    <button id="placeOrderBtn" disabled class="btn-glow w-full rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-ink font-semibold py-3 text-sm flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+      <i data-lucide="qr-code" class="w-4 h-4"></i> Place Order & Pay
+    </button>
+  </div>
+</aside>
+
+<!-- Order confirmation modal -->
+<div id="successModal" class="fixed inset-0 bg-black/70 z-[60] hidden items-center justify-center px-5">
+  <div class="glass rounded-2xl p-8 max-w-sm w-full text-center">
+    <div class="check-pop w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center mx-auto mb-4">
+      <i data-lucide="check" class="w-8 h-8 text-ink"></i>
+    </div>
+    <h3 class="font-display font-700 text-xl text-white mb-2">Order Placed!</h3>
+    <p class="text-sm text-slate-400 mb-1">Order <span id="orderId" class="text-cyan-300 font-mono"></span> is being prepared.</p>
+    <p class="text-sm text-slate-400 mb-6">It'll be served to <span class="text-white">Table 07</span> shortly.</p>
+    <button id="closeSuccess" class="btn-glow w-full rounded-full glass text-white font-semibold py-2.5 text-sm">Back to Menu</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 hidden glass rounded-full px-5 py-2.5 text-sm text-white z-[70] flex items-center gap-2"></div>
+
+<script>
+  lucide.createIcons();
+
+  const MENU = [
+    { id:1, name:'Paneer Tikka', cat:'Starters', price:220, desc:'Char-grilled cottage cheese, smoky spices.', icon:'flame' },
+    { id:2, name:'Veg Spring Rolls', cat:'Starters', price:180, desc:'Crispy rolls with julienned veggies.', icon:'sandwich' },
+    { id:3, name:'Butter Chicken', cat:'Main Course', price:340, desc:'Creamy tomato curry, tender chicken.', icon:'soup' },
+    { id:4, name:'Dal Makhani', cat:'Main Course', price:210, desc:'Slow-cooked black lentils, butter finish.', icon:'soup' },
+    { id:5, name:'Veg Biryani', cat:'Main Course', price:250, desc:'Fragrant basmati rice, mixed vegetables.', icon:'chef-hat' },
+    { id:6, name:'Butter Naan', cat:'Breads', price:60, desc:'Soft tandoor-baked flatbread.', icon:'circle' },
+    { id:7, name:'Chocolate Lava Cake', cat:'Desserts', price:160, desc:'Warm cake, molten chocolate center.', icon:'cake' },
+    { id:8, name:'Gulab Jamun (2 pc)', cat:'Desserts', price:120, desc:'Soft milk dumplings in sugar syrup.', icon:'cake' },
+    { id:9, name:'Masala Chai', cat:'Beverages', price:60, desc:'Spiced Indian tea, freshly brewed.', icon:'coffee' },
+    { id:10, name:'Fresh Lime Soda', cat:'Beverages', price:90, desc:'Sweet, salted, or plain — your choice.', icon:'cup-soda' },
+  ];
+
+  const cart = {};
+  const categories = [...new Set(MENU.map(m => m.cat))];
+  let activeCat = 'All';
+
+  function renderTabs() {
+    const tabs = ['All', ...categories];
+    const el = document.getElementById('categoryTabs');
+    el.innerHTML = tabs.map(t => `
+      <button data-cat="${t}" class="cat-tab shrink-0 eyebrow text-xs px-4 py-2 rounded-full border transition-colors ${t===activeCat ? 'bg-gradient-to-r from-cyan-400 to-purple-500 text-ink border-transparent font-semibold' : 'glass text-slate-300 border-white/10 hover:text-white'}">${t}</button>
+    `).join('');
+    el.querySelectorAll('.cat-tab').forEach(btn => btn.addEventListener('click', () => {
+      activeCat = btn.dataset.cat;
+      renderTabs();
+      renderMenu();
+    }));
+  }
+
+  function renderMenu() {
+    const items = activeCat === 'All' ? MENU : MENU.filter(m => m.cat === activeCat);
+    const grid = document.getElementById('menuGrid');
+    grid.innerHTML = items.map(item => {
+      const qty = cart[item.id]?.qty || 0;
+      return `
+      <div class="glass glass-hover rounded-2xl p-5 flex flex-col">
+        <div class="flex items-start justify-between mb-3">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-400/10 flex items-center justify-center text-cyan-300">
+            <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+          </div>
+          <span class="eyebrow text-xs text-purple-300 bg-purple-400/10 border border-purple-400/25 rounded-full px-3 py-1">${item.cat}</span>
+        </div>
+        <h3 class="font-display font-600 text-white mb-1">${item.name}</h3>
+        <p class="text-xs text-slate-400 mb-4 flex-1">${item.desc}</p>
+        <div class="flex items-center justify-between">
+          <span class="font-display font-600 text-cyan-300">₹${item.price}</span>
+          ${qty === 0
+            ? `<button data-add="${item.id}" class="add-btn btn-glow rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-ink text-xs font-semibold px-4 py-2 flex items-center gap-1"><i data-lucide="plus" class="w-3.5 h-3.5"></i> Add</button>`
+            : `<div class="flex items-center gap-3 glass rounded-full px-1">
+                <button data-dec="${item.id}" class="qty-btn w-7 h-7 rounded-full flex items-center justify-center text-white hover:bg-white/10">−</button>
+                <span class="text-sm font-semibold text-white w-4 text-center">${qty}</span>
+                <button data-inc="${item.id}" class="qty-btn w-7 h-7 rounded-full flex items-center justify-center text-white hover:bg-white/10">+</button>
+              </div>`
+          }
+        </div>
+      </div>`;
+    }).join('');
+    lucide.createIcons();
+    wireMenuButtons();
+  }
+
+  function wireMenuButtons() {
+    document.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => changeQty(+b.dataset.add, 1)));
+    document.querySelectorAll('[data-inc]').forEach(b => b.addEventListener('click', () => changeQty(+b.dataset.inc, 1)));
+    document.querySelectorAll('[data-dec]').forEach(b => b.addEventListener('click', () => changeQty(+b.dataset.dec, -1)));
+  }
+
+  function changeQty(id, delta) {
+    const item = MENU.find(m => m.id === id);
+    if (!cart[id]) cart[id] = { ...item, qty: 0 };
+    cart[id].qty += delta;
+    if (cart[id].qty <= 0) delete cart[id];
+    else showToast(delta > 0 ? `Added ${item.name}` : `Removed one ${item.name}`);
+    renderMenu();
+    renderCart();
+  }
+
+  function renderCart() {
+    const entries = Object.values(cart);
+    const count = entries.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+
+    const itemsEl = document.getElementById('cartItems');
+    const emptyEl = document.getElementById('cartEmpty');
+
+    if (entries.length === 0) {
+      itemsEl.classList.add('hidden');
+      emptyEl.classList.remove('hidden');
+      document.getElementById('placeOrderBtn').disabled = true;
+    } else {
+      itemsEl.classList.remove('hidden');
+      emptyEl.classList.add('hidden');
+      document.getElementById('placeOrderBtn').disabled = false;
+      itemsEl.innerHTML = entries.map(i => `
+        <div class="flex items-center justify-between glass rounded-xl px-4 py-3">
+          <div>
+            <p class="text-sm text-white font-medium">${i.name}</p>
+            <p class="text-xs text-slate-400">₹${i.price} × ${i.qty}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button data-dec="${i.id}" class="qty-btn w-6 h-6 rounded-full glass flex items-center justify-center text-white text-xs">−</button>
+            <span class="text-sm text-white w-3 text-center">${i.qty}</span>
+            <button data-inc="${i.id}" class="qty-btn w-6 h-6 rounded-full glass flex items-center justify-center text-white text-xs">+</button>
+          </div>
+        </div>
+      `).join('');
+      itemsEl.querySelectorAll('[data-inc]').forEach(b => b.addEventListener('click', () => changeQty(+b.dataset.inc, 1)));
+      itemsEl.querySelectorAll('[data-dec]').forEach(b => b.addEventListener('click', () => changeQty(+b.dataset.dec, -1)));
+    }
+
+    const subtotal = entries.reduce((s, i) => s + i.price * i.qty, 0);
+    const taxes = Math.round(subtotal * 0.05);
+    const total = subtotal + taxes;
+    document.getElementById('subtotal').textContent = `₹${subtotal}`;
+    document.getElementById('taxes').textContent = `₹${taxes}`;
+    document.getElementById('total').textContent = `₹${total}`;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-cyan-300"></i> ${msg}`;
+    t.classList.remove('hidden');
+    t.classList.add('toast');
+    lucide.createIcons();
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => t.classList.add('hidden'), 1600);
+  }
+
+  // Cart drawer toggle
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  function openCart() { drawer.classList.remove('closed'); overlay.classList.remove('hidden'); }
+  function closeCartFn() { drawer.classList.add('closed'); overlay.classList.add('hidden'); }
+  document.getElementById('cartToggle').addEventListener('click', openCart);
+  document.getElementById('closeCart').addEventListener('click', closeCartFn);
+  overlay.addEventListener('click', closeCartFn);
+
+  // Place order
+  document.getElementById('placeOrderBtn').addEventListener('click', () => {
+    const orderId = 'HTL-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('orderId').textContent = '#' + orderId;
+    document.getElementById('successModal').classList.remove('hidden');
+    document.getElementById('successModal').classList.add('flex');
+    Object.keys(cart).forEach(k => delete cart[k]);
+    renderMenu();
+    renderCart();
+    closeCartFn();
+  });
+  document.getElementById('closeSuccess').addEventListener('click', () => {
+    document.getElementById('successModal').classList.add('hidden');
+    document.getElementById('successModal').classList.remove('flex');
+  });
+
+  renderTabs();
+  renderMenu();
+  renderCart();
+</script>
+</body>
+</html>
