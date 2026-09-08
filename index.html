@@ -101,32 +101,18 @@
     letter-spacing: 0.12em;
   }
 
-  /* brand name — blue 3D effect */
-  /* Navbar brand name — red professional 3D effect */
-.brand-3d {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  color: #ff0000;
-  letter-spacing: 0.01em;
-  text-shadow:
-    0 1px 0 #cc0000,
-    0 2px 0 #aa0000,
-    0 3px 0 #880000,
-    0 4px 6px rgba(0, 0, 0, 0.45),
-    0 6px 14px rgba(255, 0, 0, 0.35);
-  transition: text-shadow 0.3s ease, transform 0.3s ease;
-}
+  /* Navbar brand name — simple, flat style (no 3D shadow) */
+  .brand-3d {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    transition: color 0.3s ease;
+  }
 
-.brand-3d:hover {
-  transform: translateY(-1px);
-  text-shadow:
-    0 1px 0 #cc0000,
-    0 2px 0 #aa0000,
-    0 3px 0 #880000,
-    0 4px 0 #660000,
-    0 6px 10px rgba(0, 0, 0, 0.5),
-    0 10px 22px rgba(255, 0, 0, 0.45);
-}
+  .brand-3d:hover {
+    color: var(--cyan);
+  }
 
   /* nav link underline */
   .nav-link { position: relative; }
@@ -206,14 +192,7 @@
     * { animation: none !important; transition: none !important; }
   }
 
-<style>
-
-  /* Your existing CSS */
-  .brand-3d {
-    ...
-  }
-
-  /* Add Social Icons CSS here */
+  /* Social icon buttons */
   .social-icon {
     width: 48px;
     height: 48px;
@@ -228,12 +207,11 @@
   }
 
   .social-icon:hover {
-    color: #ff0000;
-    border-color: rgba(255, 0, 0, 0.5);
-    background: rgba(255, 0, 0, 0.08);
+    color: #22d3ee;
+    border-color: rgba(34, 211, 238, 0.5);
+    background: rgba(34, 211, 238, 0.08);
     transform: translateY(-3px);
   }
-
 </style>
 
 </head>
@@ -246,7 +224,7 @@
 <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
   <nav class="max-w-6xl mx-auto px-5 sm:px-8">
     <div id="navInner" class="mt-4 flex items-center justify-between glass rounded-2xl px-6 sm:px-7 py-3.5 transition-all duration-500">
-    <a href="#home" class="brand-3d font-display font-bold text-lg tracking-tight shrink-0 mr-6" style="color: white;">
+    <a href="#home" class="brand-3d font-display font-bold text-lg tracking-tight shrink-0 mr-6">
   Atharv Vadam<span class="text-gradient"></span>
 </a>
 
@@ -378,7 +356,7 @@
 
 <!-- Contact / Social Icons -->
 <div class="flex justify-center items-center gap-5 mt-4">
- <a href="https://github.com/workwithatharva07"
+  <a href="https://github.com/workwithatharva07"
    target="_blank"
    rel="noopener noreferrer"
    class="w-14 h-14 rounded-xl glass glass-hover flex items-center justify-center text-white">
@@ -1159,4 +1137,5 @@
     });
   }
 </script>
+
 
